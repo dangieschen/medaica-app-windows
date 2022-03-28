@@ -1,20 +1,20 @@
 {
-  "name": "electron-boilerplate",
-  "productName": "Electron Boilerplate",
-  "description": "Starter for your Electron application",
-  "version": "0.0.0",
+  "name": "medaica-live-exam-app",
+  "productName": "Medaica Live Exam",
+  "description": "Medaica Live Exam Application",
+  "version": "0.1.0",
   "private": true,
-  "author": "Mr. Gumby <mr.gumby@example.com>",
-  "copyright": "© 2017, Gumby inc.",
-  "homepage": "http://example.com",
+  "author": "Dan Gieschen <dan@dangieschen.com>",
+  "homepage": "http://medaica.com",
   "main": "app/main.js",
   "build": {
-    "appId": "com.example.electron-boilerplate",
+    "appId": "com.medaica.app.live-exam",
     "mac": {
       "hardenedRuntime": true,
       "category": "public.app-category.business",
       "gatekeeperAssess": false,
       "entitlements": "build/entitlements.mac.plist",
+      "icon": "build/164x164.png",
       "entitlementsInherit": "build/entitlements.mac.plist",
       "extendInfo": {
         "NSMicrophoneUsageDescription": "We need access to your microphone to use the stethoscope.",
@@ -51,9 +51,11 @@
     "e2e": "mocha temp/e2e.js --require source-map-support/register",
     "test": "npm run unit && npm run e2e",
     "start": "node build/start.js",
-    "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder"
+    "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder",
+    "afterSign": "scripts/notarize.js"
   },
   "dependencies": {
+    "dotenv": "^16.0.0",
     "fs-jetpack": "^4.1.0"
   },
   "devDependencies": {

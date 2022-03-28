@@ -59,7 +59,7 @@ app.on("ready", () => {
     }
   });
 
-  mainWindow.loadURL("https://patient.demo.medaica.com/live-exam");
+  mainWindow.loadURL("https://patient.dev.medaica.com/live-exam");
 
   if (env.name === "development") {
     mainWindow.openDevTools();
