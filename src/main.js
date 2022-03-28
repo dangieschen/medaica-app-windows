@@ -3,8 +3,8 @@
 // It doesn't have any windows which you can see on screen, but we can open
 // window from here.
 
-import path from "path";
-import url from "url";
+// import path from "path";
+// import url from "url";
 import { app, Menu, ipcMain, shell } from "electron";
 import appMenuTemplate from "./menu/app_menu_template";
 import editMenuTemplate from "./menu/edit_menu_template";
@@ -33,7 +33,7 @@ const setApplicationMenu = () => {
 
 // We can communicate with our window (the renderer process) via messages.
 const initIpc = () => {
-  ipcMain.on("need-app-path", (event, arg) => {
+  ipcMain.on("need-app-path", (event) => {
     event.reply("app-path", app.getAppPath());
   });
   ipcMain.on("open-external-link", (event, href) => {
@@ -59,13 +59,7 @@ app.on("ready", () => {
     }
   });
 
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, "app.html"),
-      protocol: "file:",
-      slashes: true
-    })
-  );
+  mainWindow.loadURL("https://patient.demo.medaica.com/live-exam");
 
   if (env.name === "development") {
     mainWindow.openDevTools();

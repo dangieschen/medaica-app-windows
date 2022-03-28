@@ -10,6 +10,29 @@
   "main": "app/main.js",
   "build": {
     "appId": "com.example.electron-boilerplate",
+    "mac": {
+      "hardenedRuntime": true,
+      "category": "public.app-category.business",
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "We need access to your microphone to use the stethoscope.",
+        "NSCameraUsageDescription": "We need access to the camera to see your health care professional."
+      },
+      "target": [
+        "mas",
+        "dmg",
+        "zip"
+      ]
+    },
+    "mas": {
+      "entitlements": "./build/entitlements.mas.plist",
+      "entitlementsInherit": "./build/entitlements.mas.inherit.plist"
+    },
+    "dmg": {
+      "sign": false
+    },
     "files": [
       "app/**/*",
       "node_modules/**/*",
