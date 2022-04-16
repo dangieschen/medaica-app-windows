@@ -1,37 +1,29 @@
 {
   "name": "medaica-live-exam-app",
-  "productName": "Medaica Live Exam",
-  "description": "Medaica Live Exam Application",
+  "productName": "Medaica Live Exam (BETA)",
+  "description": "Medaica Live Exam Application (BETA)",
   "version": "0.1.0",
   "private": true,
-  "author": "Dan Gieschen <dan@dangieschen.com>",
-  "homepage": "http://medaica.com",
+  "author": "Dan Gieschen <dan.gieschen@medaica.com>",
+  "homepage": "http://www.medaica.com",
   "main": "app/main.js",
   "build": {
-    "appId": "com.medaica.app.live-exam",
-    "mac": {
-      "hardenedRuntime": true,
-      "category": "public.app-category.business",
-      "gatekeeperAssess": false,
-      "entitlements": "build/entitlements.mac.plist",
-      "icon": "build/164x164.png",
-      "entitlementsInherit": "build/entitlements.mac.plist",
-      "extendInfo": {
-        "NSMicrophoneUsageDescription": "We need access to your microphone to use the stethoscope.",
-        "NSCameraUsageDescription": "We need access to the camera to see your health care professional."
-      },
-      "target": [
-        "mas",
-        "dmg",
-        "zip"
-      ]
+    "appId": "com.medaica.app.windows.live-exam.beta",
+    "protocols": [
+      {
+        "name": "Medaica Live",
+        "schemes": ["medaica-live"]
+      }
+    ],
+    "win": {
+      "publisherName": "Medaica Inc.",
+      "certificateFile": "./Certs/Windows/medaica_inc.p12",
+      "certificatePassword": "Medaica-SPCMND2022!"
     },
-    "mas": {
-      "entitlements": "./build/entitlements.mas.plist",
-      "entitlementsInherit": "./build/entitlements.mas.inherit.plist"
-    },
-    "dmg": {
-      "sign": false
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
     },
     "files": [
       "app/**/*",
@@ -52,7 +44,8 @@
     "test": "npm run unit && npm run e2e",
     "start": "node build/start.js",
     "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder",
-    "afterSign": "scripts/notarize.js"
+    "afterSign": "scripts/notarize.js",
+    "win": "electron-builder build --win -c.extraMetadata.main=app/main.js --publish never"
   },
   "dependencies": {
     "dotenv": "^16.0.0",
